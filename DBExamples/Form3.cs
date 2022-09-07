@@ -57,7 +57,7 @@ namespace DBExamples
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            foreach(Control ctrl in this.Controls)
+            foreach (Control ctrl in this.Controls)
             {
                 if (ctrl is TextBox)
                 {
@@ -75,10 +75,33 @@ namespace DBExamples
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            cmd.CommandText =$"Insert Into Employee (Eno, Ename, Job, Salary, Status) Values ({{textBox1.Text}}, '{{textBox2.Text}}', '{{textBox3.Text}}', {{textBox4.Text}}, {{Convert.ToInt32(checkBox1.Checked)}})";
-            if (cmd.ExecuteNonQuery()>0)
+            cmd.CommandText = $"Insert Into Employee (Eno, Ename, Job, Salary, Status) Values ({{textBox1.Text}}, '{{textBox2.Text}}', '{{textBox3.Text}}', {{textBox4.Text}}, {{Convert.ToInt32(checkBox1.Checked)}})";
+            if (cmd.ExecuteNonQuery() > 0)
             {
-                MessageBox.Show("Insert Operation is succesfull","Sucess",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Insert Operation is succesfull", "Sucess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadData();
+                btnInsert.Enabled = checkBox1.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Failed Inserting Data to the tables", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            dr.Close();
+            cmd.CommandText = $"Update Employee Set Ename='{textBox2.Text}',Job='{textBox3.Text}',Salary={textBox4.Text} Where Eno={textBox1.Text}";
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                MessageBox.Show("Update operations is successful.", "Success", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+                LoadData();
+            }
+            else
+            {
+                MessageBox.Show("Failed updating record in the table.", "Failure", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
 
             }
         }
