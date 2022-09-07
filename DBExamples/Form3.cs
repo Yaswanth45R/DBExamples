@@ -126,5 +126,14 @@ namespace DBExamples
 
             }
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            if (con.State != ConnectionState.Closed)
+            {
+                con.Close();
+            }
+            this.Close();
+        }
     }
 }
