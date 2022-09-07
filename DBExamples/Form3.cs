@@ -75,7 +75,12 @@ namespace DBExamples
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
+            cmd.CommandText =$"Insert Into Employee (Eno, Ename, Job, Salary, Status) Values ({{textBox1.Text}}, '{{textBox2.Text}}', '{{textBox3.Text}}', {{textBox4.Text}}, {{Convert.ToInt32(checkBox1.Checked)}})";
+            if (cmd.ExecuteNonQuery()>0)
+            {
+                MessageBox.Show("Insert Operation is succesfull","Sucess",MessageBoxButtons.OK,MessageBoxIcon.Information);
 
+            }
         }
     }
 }
