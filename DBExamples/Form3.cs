@@ -72,5 +72,10 @@ namespace DBExamples
             checkBox1.Enabled = btnInsert.Enabled = true;
             textBox2.Focus();
         }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
