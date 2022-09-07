@@ -105,5 +105,26 @@ namespace DBExamples
 
             }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure of deleting the record?","Conformation",MessageBoxButtons.YesNo,MessageBoxIcon.Question)== DialogResult.Yes)
+            {
+                dr.Close();
+                cmd.CommandText = $"Update Employee Set Status=0 Where Eno={textBox1.Text}";
+                if (cmd.ExecuteNonQuery()>0)
+                {
+                    MessageBox.Show("Delete operations is successful.", "Success", MessageBoxButtons.OK,
+                                        MessageBoxIcon.Information);
+                    LoadData();
+                }
+                else
+                {
+                    MessageBox.Show("Failed deleting the record from table.", "Failure", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                }
+
+            }
+        }
     }
 }
